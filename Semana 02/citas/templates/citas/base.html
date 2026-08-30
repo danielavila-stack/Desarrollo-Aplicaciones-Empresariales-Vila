@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}D´VIDA &amp; MENTE{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        html { scroll-behavior: smooth; }
+        :root { --navy: #0f172a; --blue: #2563eb; --page: #f8fafc; --ink: #172033; --muted: #64748b; }
+        body { background: var(--page); color: var(--ink); font-family: 'Plus Jakarta Sans', sans-serif; padding-top: 76px; }
+        .navbar { background: rgba(15,23,42,.98); min-height: 76px; position: fixed; top: 0; width: 100%; z-index: 1030; transition: background .25s ease, box-shadow .25s ease, backdrop-filter .25s ease; }
+        .navbar.scrolled { background: rgba(15,23,42,.78); backdrop-filter: blur(16px); box-shadow: 0 10px 30px rgba(15,23,42,.16); }
+        .brand-mark { color: #fff; letter-spacing: -.02em; }
+        .brand-subtitle { color: #94a3b8; font-size: .68rem; letter-spacing: .04em; }
+        .brand-badge { background: #1e293b; border: 1px solid #334155; color: #cbd5e1; font-size: .68rem; }
+        .page-shell { width: 100%; }
+        .surface { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; }
+        .btn-primary { background: var(--blue); border-color: var(--blue); }
+        .btn-primary:hover { background: #1d4ed8; border-color: #1d4ed8; }
+        .navbar .btn-primary { background: #fff; border-color: #fff; color: var(--navy); }
+        .navbar .btn-primary:hover { background: #dbeafe; border-color: #dbeafe; }
+        .nav-link { color: #94a3b8; font-size: .86rem; font-weight: 600; }
+        .nav-link:hover, .nav-link.active { color: #fff; }
+        .page-title { color: #0f172a; letter-spacing: -.04em; }
+        .eyebrow { color: var(--blue); letter-spacing: .14em; }
+        .metric-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,.05); transition: transform .25s ease, box-shadow .25s ease; }
+        .metric-card:hover { box-shadow: 0 12px 28px rgba(15,23,42,.1); transform: translateY(-3px); }
+        .metric-icon { align-items: center; background: #eff6ff; border-radius: 12px; color: var(--blue); display: inline-flex; height: 42px; justify-content: center; width: 42px; }
+        .metric-value { color: #111827; font-size: 2rem; font-weight: 800; line-height: 1; }
+        .metric-pending .metric-icon { background: #fffbeb; color: #f59e0b; }
+        .metric-pending .metric-value { color: #f59e0b; }
+        .metric-confirmed .metric-icon { background: #eff6ff; color: #3b82f6; }
+        .metric-confirmed .metric-value { color: #3b82f6; }
+        .metric-completed .metric-icon { background: #ecfdf5; color: #10b981; }
+        .metric-completed .metric-value { color: #10b981; }
+        .badge { border-radius: 50px; font-size: .72rem; font-weight: 700; padding: .45rem .7rem; }
+        .badge-pendiente { background: #fef3c7; color: #92400e; }
+        .badge-confirmada { background: #3b82f6; color: #fff; }
+        .badge-atendida, .badge-completada { background: #059669; color: #fff; }
+        .badge-cancelada { background: #ef4444; color: #fff; }
+        .appointments-table thead th { background: #f8fafc; color: #64748b; font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; }
+        .appointments-table tbody tr { transition: background .2s ease; }
+        .appointments-table tbody tr:hover { background: #f8fbff; }
+        .appointments-table td, .appointments-table th { border-left: 0; border-right: 0; border-color: #e2e8f0; padding: 1rem .9rem; vertical-align: middle; }
+        .search-box { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; }
+        .search-box .form-control, .search-box .form-select { border: 0; box-shadow: none; }
+        .toast-container { z-index: 1080; }
+        .hero-panel { background: linear-gradient(135deg, #f0f7ff 0%, #e2e8f0 100%); border: 1px solid #dbeafe; border-radius: 24px; padding: clamp(2rem, 5vw, 4.5rem); overflow: hidden; }
+        .hero-badge { background: rgba(255,255,255,.72); border: 1px solid #bfdbfe; border-radius: 50px; color: #1d4ed8; display: inline-flex; font-size: .75rem; font-weight: 700; padding: .55rem .9rem; }
+        .hero-title { color: #0f172a; font-size: clamp(2.25rem, 4vw, 4rem); font-weight: 800; letter-spacing: -.06em; line-height: 1.08; max-width: 700px; }
+        .hero-copy { color: #475569; font-size: 1rem; line-height: 1.8; max-width: 610px; }
+        .summary-card { background: #fff; border: 1px solid rgba(255,255,255,.8); border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,.08); padding: 1.5rem; }
+        .summary-mark { align-items: center; background: #eff6ff; border-radius: 12px; color: var(--blue); display: inline-flex; height: 40px; justify-content: center; width: 40px; }
+        .summary-metric { border: 1px solid #e2e8f0; border-radius: 14px; padding: 1rem; }
+        .summary-metric small { color: #94a3b8; display: block; font-size: .68rem; margin-top: .25rem; }
+        .metric-label { color: #64748b; display: block; font-size: .7rem; font-weight: 700; text-transform: uppercase; }
+        .metric-number { display: block; font-size: 1.8rem; line-height: 1.2; }
+        .section-kicker { color: var(--blue); font-size: .68rem; font-weight: 800; letter-spacing: .14em; }
+        .section-title { color: #0f172a; font-size: 1.4rem; font-weight: 800; letter-spacing: -.03em; }
+        .service-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; box-shadow: 0 4px 20px rgba(15,23,42,.04); height: 100%; padding: 1.35rem; transition: transform .25s ease, box-shadow .25s ease; }
+        .service-card:hover { box-shadow: 0 14px 30px rgba(15,23,42,.1); transform: translateY(-5px); }
+        .service-icon { align-items: center; border-radius: 15px; display: inline-flex; font-size: 1.6rem; height: 52px; justify-content: center; width: 52px; }
+        .icon-mind { background: #ede9fe; }.icon-talk { background: #dbeafe; }.icon-leaf { background: #dcfce7; }.icon-care { background: #fee2e2; }
+        .action-btn { border: 1px solid #e2e8f0; border-radius: 8px; color: #64748b; }
+        .action-btn:hover { background: #eff6ff; color: var(--blue); }
+        .empty-state { padding: 3.5rem 1rem; text-align: center; }
+        .empty-icon { align-items: center; background: #eff6ff; border-radius: 50%; color: var(--blue); display: inline-flex; font-size: 1.8rem; height: 64px; justify-content: center; width: 64px; }
+        .form-floating > textarea.form-control { height: 136px; min-height: 136px; }
+        @media (max-width: 575px) { .brand-badge { display: none; } .hero-panel { border-radius: 18px; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark">
+        <div class="container-fluid page-shell px-4 px-lg-5 py-2">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'citas:lista' %}#inicio">
+                <span class="brand-mark fw-bold">D´VIDA &amp; MENTE</span>
+                <span class="brand-badge rounded-pill px-2 py-1">Centro Psicológico</span>
+            </a>
+            <div class="d-flex align-items-center gap-3">
+                <a class="nav-link d-none d-md-inline" href="{% url 'citas:lista' %}#inicio"><i class="bi bi-house-door me-1"></i>Inicio</a>
+                <a class="nav-link d-none d-md-inline" href="{% url 'citas:lista' %}#tabla-citas"><i class="bi bi-calendar3 me-1"></i>Agenda</a>
+                <a class="btn btn-primary rounded-pill px-3" href="{% url 'citas:crear' %}"><i class="bi bi-plus-lg me-1"></i>Nueva Cita</a>
+            </div>
+        </div>
+    </nav>
+    <main class="container-fluid page-shell px-4 px-lg-5 pt-4 pb-5">
+        {% block content %}{% endblock %}
+    </main>
+    {% if messages %}
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            {% for message in messages %}
+                <div class="toast show border-0 shadow-sm" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header border-0"><i class="bi bi-check-circle-fill text-success me-2"></i><strong class="me-auto">Actualización confirmada</strong><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button></div>
+                    <div class="toast-body">{{ message }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        window.addEventListener('scroll', () => document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 12));
+    </script>
+</body>
+</html>

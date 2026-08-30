@@ -1,0 +1,79 @@
+{% extends 'citas/base.html' %}
+
+{% block title %}Inicio | D´VIDA &amp; MENTE{% endblock %}
+
+{% block content %}
+<section id="inicio" class="hero-panel mb-5">
+    <div class="row align-items-center g-5">
+        <div class="col-lg-7">
+            <span class="hero-badge"><i class="bi bi-heart-pulse-fill me-2"></i>Atención integral emocional</span>
+            <h1 class="hero-title mt-4 mb-3">Tu bienestar merece una atención personalizada.</h1>
+            <p class="hero-copy mb-4">Acompañamos cada proceso con escucha, criterio clínico y un seguimiento cercano para ayudarte a construir una vida emocional más saludable.</p>
+            <div class="d-flex flex-wrap gap-3">
+                <a href="{% url 'crear_cita' %}" class="btn btn-primary btn-lg rounded-pill px-4"><i class="bi bi-calendar-plus me-2"></i>Reservar consulta</a>
+                <a href="#tabla-citas" class="btn btn-outline-primary btn-lg rounded-pill px-4"><i class="bi bi-calendar3 me-2"></i>Ver agenda</a>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="summary-card">
+                <div class="d-flex justify-content-between align-items-start mb-4"><div><p class="section-kicker mb-1">Resumen del centro</p><h2 class="h5 fw-bold mb-0">Estado de la agenda</h2></div><span class="summary-mark"><i class="bi bi-activity"></i></span></div>
+                <div class="row g-3">
+                    <div class="col-6"><div class="summary-metric"><span class="metric-label">Total</span><strong class="metric-number text-dark">{{ total_citas }}</strong><small>citas registradas</small></div></div>
+                    <div class="col-6"><div class="summary-metric"><span class="metric-label">Pendientes</span><strong class="metric-number text-warning">{{ pendientes }}</strong><small>por confirmar</small></div></div>
+                    <div class="col-6"><div class="summary-metric"><span class="metric-label">Confirmadas</span><strong class="metric-number text-primary">{{ confirmadas }}</strong><small>en agenda</small></div></div>
+                    <div class="col-6"><div class="summary-metric"><span class="metric-label">Completadas</span><strong class="metric-number text-success">{{ completadas }}</strong><small>sesiones atendidas</small></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mb-5">
+    <div class="d-flex justify-content-between align-items-end mb-3"><div><p class="section-kicker mb-1">NUESTROS SERVICIOS</p><h2 class="section-title mb-0">Especialidades para tu bienestar</h2></div></div>
+    <div class="row g-3">
+        <div class="col-sm-6 col-xl-3"><div class="service-card"><span class="service-icon icon-mind">🧠</span><h3 class="h6 fw-bold mt-4">Terapia individual</h3><p class="small text-secondary mb-0">Un espacio seguro para comprenderte y avanzar.</p></div></div>
+        <div class="col-sm-6 col-xl-3"><div class="service-card"><span class="service-icon icon-talk">💬</span><h3 class="h6 fw-bold mt-4">Terapia de pareja</h3><p class="small text-secondary mb-0">Comunicación y acuerdos para vínculos más sanos.</p></div></div>
+        <div class="col-sm-6 col-xl-3"><div class="service-card"><span class="service-icon icon-leaf">🌿</span><h3 class="h6 fw-bold mt-4">Bienestar emocional</h3><p class="small text-secondary mb-0">Herramientas prácticas para tu equilibrio diario.</p></div></div>
+        <div class="col-sm-6 col-xl-3"><div class="service-card"><span class="service-icon icon-care">🩺</span><h3 class="h6 fw-bold mt-4">Evaluación inicial</h3><p class="small text-secondary mb-0">Conoce tus necesidades y define el mejor camino.</p></div></div>
+    </div>
+</section>
+
+<section id="tabla-citas">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-3"><div><p class="section-kicker mb-1">GESTIÓN CLÍNICA</p><h2 class="section-title mb-0">Próximas citas</h2></div><a href="{% url 'citas:lista' %}" class="btn btn-link text-decoration-none fw-bold">Ver todas <i class="bi bi-arrow-right ms-1"></i></a></div>
+    <form method="get" class="search-box p-2 mb-4">
+        <div class="row g-2 align-items-center">
+            <div class="col-lg-5"><label for="q" class="visually-hidden">Buscar por paciente o estado</label><div class="input-group"><span class="input-group-text bg-transparent border-0 text-secondary"><i class="bi bi-search"></i></span><input id="q" name="q" value="{{ busqueda }}" class="form-control" placeholder="Buscar paciente o estado..." autocomplete="off"></div></div>
+            <div class="col-sm-5 col-lg-3"><label for="fecha_hora" class="visually-hidden">Fecha exacta</label><input id="fecha_hora" name="fecha_hora" type="date" value="{{ fecha_hora }}" class="form-control"></div>
+            <div class="col-sm-4 col-lg-2"><label for="estado" class="visually-hidden">Estado</label><select id="estado" name="estado" class="form-select"><option value="">Todos los estados</option><option value="Pendiente" {% if estado_seleccionado == 'Pendiente' %}selected{% endif %}>Pendiente</option><option value="Confirmada" {% if estado_seleccionado == 'Confirmada' %}selected{% endif %}>Confirmada</option><option value="Atendida" {% if estado_seleccionado == 'Atendida' %}selected{% endif %}>Atendida</option><option value="Cancelada" {% if estado_seleccionado == 'Cancelada' %}selected{% endif %}>Cancelada</option></select></div>
+            <div class="col-sm-3 col-lg-2 d-grid"><button class="btn btn-primary rounded-pill" type="submit"><i class="bi bi-funnel me-1"></i>Filtrar</button></div>
+        </div>
+    </form>
+    <div class="surface overflow-hidden">
+        <div class="table-responsive">
+            <table class="table appointments-table align-middle mb-0">
+                <thead><tr><th>ID</th><th>Paciente</th><th>Teléfono</th><th>Fecha y hora</th><th>Motivo de consulta</th><th>Estado</th><th>Acciones</th></tr></thead>
+                <tbody>
+                {% for cita in citas %}
+                    <tr data-patient="{{ cita.paciente_nombre|lower }}" data-status="{{ cita.estado|lower }}"><td class="fw-bold text-secondary">#{{ cita.id }}</td><td class="fw-bold">{{ cita.paciente_nombre }}</td><td class="text-secondary">{{ cita.paciente_telefono }}</td><td>{{ cita.fecha_hora|date:"Y-m-d H:i" }}</td><td class="text-secondary">{{ cita.motivo_consulta }}</td><td><span class="badge badge-{{ cita.estado|lower }}">{% if cita.estado == 'Atendida' %}Completada{% else %}{{ cita.estado }}{% endif %}</span></td><td><div class="d-flex gap-1 align-items-center"><a href="{% url 'citas:detalle' cita.id %}" class="btn btn-sm btn-light action-btn" title="Ver detalle"><i class="bi bi-eye"></i><span class="visually-hidden">Ver detalle</span></a><form method="post" action="{% url 'citas:cambiar_estado' cita.id %}" class="d-flex gap-1">{% csrf_token %}<select name="estado" class="form-select form-select-sm" aria-label="Nuevo estado para {{ cita.paciente_nombre }}"><option value="Pendiente" {% if cita.estado == 'Pendiente' %}selected{% endif %}>Pendiente</option><option value="Confirmada" {% if cita.estado == 'Confirmada' %}selected{% endif %}>Confirmada</option><option value="Atendida" {% if cita.estado == 'Atendida' %}selected{% endif %}>Atendida</option><option value="Cancelada" {% if cita.estado == 'Cancelada' %}selected{% endif %}>Cancelada</option></select><button type="submit" class="btn btn-sm btn-light action-btn" title="Cambiar estado"><i class="bi bi-arrow-repeat"></i><span class="visually-hidden">Cambiar Estado</span></button></form><button type="button" class="btn btn-sm btn-light action-btn text-danger" title="Eliminar cita" data-bs-toggle="modal" data-bs-target="#deleteAppointmentModal" data-delete-url="{% url 'citas:eliminar' cita.id %}" data-patient-name="{{ cita.paciente_nombre }}"><i class="bi bi-trash3"></i><span class="visually-hidden">Eliminar</span></button></div></td></tr>
+                {% empty %}<tr><td colspan="7"><div class="empty-state"><span class="empty-icon"><i class="bi bi-calendar-heart"></i></span><h3 class="h6 fw-bold mt-3 mb-2">No hay citas para mostrar</h3><p class="small text-secondary mb-3">Prueba con otros filtros o agenda una nueva consulta.</p><a href="{% url 'citas:crear' %}" class="btn btn-sm btn-primary rounded-pill"><i class="bi bi-plus-lg me-1"></i>Agendar cita</a></div></td></tr>{% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="deleteAppointmentModal" tabindex="-1" aria-labelledby="deleteAppointmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header"><h2 class="modal-title h5 fw-bold" id="deleteAppointmentModalLabel"><i class="bi bi-exclamation-triangle text-warning me-2"></i>Cancelar cita</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button></div>
+            <div class="modal-body text-secondary">¿Estás seguro de que deseas eliminar la cita de <strong id="deletePatientName" class="text-dark"></strong>? Esta acción no se puede deshacer.</div>
+            <div class="modal-footer"><button type="button" class="btn btn-light" data-bs-dismiss="modal">Volver</button><form id="deleteAppointmentForm" method="post">{% csrf_token %}<button type="submit" class="btn btn-danger"><i class="bi bi-trash3 me-1"></i>Eliminar cita</button></form></div>
+        </div>
+    </div>
+</div>
+<script>
+    const searchInput = document.getElementById('q');
+    const appointmentRows = document.querySelectorAll('.appointments-table tbody tr[data-patient]');
+    searchInput.addEventListener('input', () => { const query = searchInput.value.trim().toLowerCase(); appointmentRows.forEach((row) => row.classList.toggle('d-none', !(row.dataset.patient.includes(query) || row.dataset.status.includes(query)))); });
+    document.getElementById('deleteAppointmentModal').addEventListener('show.bs.modal', (event) => { const button = event.relatedTarget; document.getElementById('deleteAppointmentForm').action = button.dataset.deleteUrl; document.getElementById('deletePatientName').textContent = button.dataset.patientName; });
+</script>
+{% endblock %}
