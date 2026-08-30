@@ -2,10 +2,19 @@
 
 Aplicación web desarrollada en Django para la gestión de citas de consulta psicológica en memoria RAM (sin base de datos/ORM).
 
-## 📌 Problemática
+## Integrantes
+- **Chavez Lazo, Karla Estefany**
+- **Vila Ramos, Daniela Fransua**
+
+**Carrera:** Diseño y Desarrollo de Software  
+**Sección:** C24-D  
+
+---
+
+##  Problemática
 El consultorio psicológico "D’VIDA & MENTE" requiere un sistema ágil para organizar la agenda diaria de pacientes, visualizar los estados de las sesiones y filtrar consultas sin depender de persistencia en base de datos para este módulo temporal.
 
-## 📋 Requisitos Funcionales Implementados
+## Requisitos Funcionales Implementados
 - **RF1:** Registro de nuevas citas con datos del paciente y sesión.
 - **RF2:** Listado completo de citas agendadas.
 - **RF3:** Categorización por estados (PENDIENTE, CONFIRMADA, COMPLETADA, CANCELADA).
@@ -19,11 +28,12 @@ El consultorio psicológico "D’VIDA & MENTE" requiere un sistema ágil para or
 - **RF11:** Validación de formato y longitud en el número telefónico.
 - **RF12:** Mensajes emergentes de confirmación al usuario (`django.contrib.messages`).
 
-## 🛠️ Estructura del Proyecto
+## Estructura del Proyecto
 - **App creada:** `citas`
 - **Modelo de datos:** Estructura de listas y diccionarios estáticos (`CITAS_DB`) en `citas/models.py`.
 
-## 🚀 Ejecución del Proyecto
-1. Activar el entorno virtual:
+## Ejecución del Proyecto
+1. Activar el entorno virtual e instalar dependencias:
    ```bash
-   .venv\Scripts\activate
+   venv\Scripts\activate
+   pip install -r requirements.txt
