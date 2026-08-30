@@ -37,3 +37,7 @@ El consultorio psicológico "D’VIDA & MENTE" requiere un sistema ágil para or
    ```bash
    venv\Scripts\activate
    pip install -r requirements.txt
+
+## Casos de Prueba
+<img width="1600" height="537" alt="Caso de prueba" src="https://github.com/user-attachments/assets/e21f3c82-fad9-481c-ab94-3da27144185c" />
+
