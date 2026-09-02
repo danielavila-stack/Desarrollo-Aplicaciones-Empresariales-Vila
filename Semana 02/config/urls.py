@@ -16,10 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from citas.views import crear_cita_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('nueva/', crear_cita_view, name='crear_cita'),
-    path('', include('citas.urls')),
+    path('', include('core.urls')),
+    path('citas/', include('citas.urls')),
 ]
