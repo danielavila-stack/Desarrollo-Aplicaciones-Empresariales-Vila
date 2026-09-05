@@ -1,0 +1,47 @@
+{% extends 'citas/base.html' %}
+
+{% block title %}Nueva cita | D'VIDA &amp; MENTE{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="mb-4">
+            <p class="text-uppercase small fw-bold mb-1" style="color: var(--coral);">Agenda de atención</p>
+            <h1 class="display-6 fw-bold">Registrar nueva cita</h1>
+        </div>
+        <form method="post" class="card border-0 shadow-sm p-4 p-md-5">
+            {% csrf_token %}
+            {% if form.non_field_errors %}<div class="alert alert-danger">{{ form.non_field_errors }}</div>{% endif %}
+            <div class="form-floating mb-3">
+                {{ form.paciente_nombre }}
+                <label for="{{ form.paciente_nombre.id_for_label }}">{{ form.paciente_nombre.label }}</label>
+                {% for error in form.paciente_nombre.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+            </div>
+            <div class="form-floating mb-3">
+                {{ form.paciente_telefono }}
+                <label for="{{ form.paciente_telefono.id_for_label }}">{{ form.paciente_telefono.label }}</label>
+                {% for error in form.paciente_telefono.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+            </div>
+            <div class="form-floating mb-3">
+                {{ form.fecha_hora }}
+                <label for="{{ form.fecha_hora.id_for_label }}">{{ form.fecha_hora.label }}</label>
+                {% for error in form.fecha_hora.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+            </div>
+            <div class="form-floating mb-3">
+                {{ form.motivo_consulta }}
+                <label for="{{ form.motivo_consulta.id_for_label }}">{{ form.motivo_consulta.label }}</label>
+                {% for error in form.motivo_consulta.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+            </div>
+            <div class="form-floating mb-3">
+                {{ form.estado }}
+                <label for="{{ form.estado.id_for_label }}">{{ form.estado.label }}</label>
+                {% for error in form.estado.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+            </div>
+            <div class="d-flex gap-2 pt-2">
+                <button type="submit" class="btn btn-primary">Guardar cita</button>
+                <a href="{% url 'citas:lista' %}" class="btn btn-outline-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

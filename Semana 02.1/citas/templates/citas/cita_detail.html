@@ -1,0 +1,24 @@
+{% extends 'citas/base.html' %}
+
+{% block title %}Detalle de cita | D'VIDA &amp; MENTE{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="mt-4 mb-3 py-3">
+            <a href="{% url 'citas:lista' %}#tabla-citas" class="btn btn-outline-secondary btn-sm rounded-pill px-3"><i class="bi bi-arrow-left me-1"></i>Volver a la agenda</a>
+        </div>
+        <div class="surface p-4 p-md-5 mt-3">
+            <div class="d-flex flex-wrap justify-content-between gap-3 align-items-start mb-4">
+                <div><p class="text-uppercase small fw-bold mb-1" style="color: var(--blue);">Detalle de cita #{{ cita.id }}</p><h1 class="h2 fw-bold mb-0">{{ cita.paciente_nombre }}</h1></div>
+                <span class="badge rounded-pill badge-{{ cita.estado|lower }}">{{ cita.estado }}</span>
+            </div>
+            <dl class="row border-top pt-3">
+                <dt class="col-sm-4 text-secondary">Teléfono</dt><dd class="col-sm-8">{{ cita.paciente_telefono }}</dd>
+                <dt class="col-sm-4 text-secondary">Fecha y hora</dt><dd class="col-sm-8">{{ cita.fecha_hora|date:"Y-m-d H:i" }}</dd>
+                <dt class="col-sm-4 text-secondary">Motivo de consulta</dt><dd class="col-sm-8">{{ cita.motivo_consulta }}</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+{% endblock %}
