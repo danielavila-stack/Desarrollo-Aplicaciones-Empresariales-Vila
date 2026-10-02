@@ -1,0 +1,8 @@
+{% extends 'veterinaria/base.html' %}
+{% block title %}Especies{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4"><h1>Especies</h1><a class="btn btn-success" href="{% url 'crear_especie' %}">Nueva especie</a></div>
+<div class="card shadow-sm"><div class="table-responsive"><table class="table table-hover mb-0"><thead><tr><th>Nombre</th><th class="text-end">Acciones</th></tr></thead><tbody>
+{% for especie in especies %}<tr><td>{{ especie.nombre }}</td><td class="text-end"><a class="btn btn-sm btn-outline-primary" href="{% url 'editar_especie' especie.pk %}">Editar</a> <form class="d-inline" method="post" action="{% url 'eliminar_especie' especie.pk %}">{% csrf_token %}<button class="btn btn-sm btn-outline-danger" type="submit">Eliminar</button></form></td></tr>{% empty %}<tr><td colspan="2" class="text-center text-muted py-4">No hay especies registradas.</td></tr>{% endfor %}
+</tbody></table></div></div>
+{% endblock %}
