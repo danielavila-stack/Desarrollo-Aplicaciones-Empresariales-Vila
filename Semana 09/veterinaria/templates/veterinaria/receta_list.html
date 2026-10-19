@@ -1,0 +1,25 @@
+{% extends 'veterinaria/base.html' %}
+{% block title %}Control de Recetas Médicas{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Control de Recetas Médicas</h1>
+    <a class="btn btn-success rounded-pill px-3" href="{% url 'crear_detalle' %}"><i class="bi bi-plus-lg me-1"></i>Agregar medicamento a receta</a>
+</div>
+{% for cita in citas %}
+<div class="card shadow-sm border-0 rounded-3 mb-3">
+    <div class="card-header bg-white"><span class="badge bg-primary me-2">Cita #{{ cita.id }}</span>{{ cita.fecha_hora }} - {{ cita.mascota.nombre }}</div>
+    <div class="table-responsive"><table class="table table-hover align-middle mb-0">
+        <thead><tr><th>Insumo</th><th>Cantidad</th><th>Indicaciones de uso</th></tr></thead>
+        <tbody>
+            {% for detalle in cita.detalles_receta.all %}
+            <tr><td>{{ detalle.insumo.nombre }}</td><td><span class="badge bg-success">{{ detalle.cantidad }}</span></td><td>{{ detalle.indicaciones_uso }}</td></tr>
+            {% empty %}
+            <tr><td colspan="3" class="text-center text-muted py-3">No hay insumos recetados.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table></div>
+</div>
+{% empty %}
+<p class="text-muted">No hay citas registradas.</p>
+{% endfor %}
+{% endblock %}
