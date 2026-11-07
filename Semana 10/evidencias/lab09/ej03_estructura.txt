@@ -1,0 +1,21 @@
+﻿frontend
++-- public
+|   +-- favicon.svg
+|   \-- icons.svg
++-- src
+|   +-- assets
+|   |   +-- hero.png
+|   |   +-- react.svg
+|   |   \-- vite.svg
+|   +-- App.css
+|   +-- App.jsx
+|   \-- main.jsx
++-- .gitignore
++-- .oxlintrc.json
++-- index.html
++-- package.json
++-- package-lock.json
++-- README.md
+\-- vite.config.js
+
+Nota: node_modules y dist se omiten por ser dependencias instaladas y artefactos de compilación.

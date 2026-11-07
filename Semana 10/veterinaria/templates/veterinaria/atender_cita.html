@@ -1,0 +1,58 @@
+{% extends 'veterinaria/base.html' %}
+
+{% block title %}Atender Cita #{{ cita.id }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4" style="max-width: 650px;">
+    <!-- MENSAJES DE ÉXITO O ERROR (ROLLBACK) -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="card shadow border-0">
+        <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-journal-check me-2"></i>Atender Cita Médica #{{ cita.id }}
+        </div>
+        <div class="card-body">
+            <p><strong>Mascota:</strong> {{ cita.mascota.nombre }}</p>
+            <p><strong>Veterinario:</strong> {{ cita.veterinario }}</p>
+            <p><strong>Estado Actual:</strong> <span class="badge bg-warning text-dark">{{ cita.estado }}</span></p>
+
+            <hr>
+
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Seleccionar Insumo/Medicamento</label>
+                    <select name="insumo" class="form-select" required>
+                        {% for insumo in insumos %}
+                            <option value="{{ insumo.id }}">
+                                {{ insumo.nombre }} (Stock: {{ insumo.stock }} | S/ {{ insumo.precio }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Cantidad a Recetar</label>
+                    <input type="number" name="cantidad" class="form-control" value="1" min="1" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Indicaciones de uso</label>
+                    <textarea name="indicaciones_uso" class="form-control" rows="2">Tomar cada 8 horas</textarea>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100 fw-bold">
+                    Procesar Atención (Transacción)
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
