@@ -1,0 +1,332 @@
+.practica-dashboard {
+  width: min(1200px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 40px 0;
+  color: #263b38;
+}
+
+.practica-header {
+  margin-bottom: 24px;
+  padding: 30px 34px;
+  border: 1px solid #dce9e4;
+  border-radius: 12px;
+  background: #f4f7f6;
+  box-shadow: 0 8px 24px rgb(32 60 54 / 7%);
+}
+
+.practica-header h1 {
+  margin: 10px 0;
+  color: #1e3d34;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+}
+
+.practica-header > p:last-child {
+  margin-bottom: 0;
+  color: #435a53;
+  font-size: 1.05rem;
+}
+
+.practica-eyebrow {
+  margin: 0;
+  color: #087f6b;
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.practica-search {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 22px;
+  color: #315b50;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.practica-search input {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid #b8cbc4;
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #263b38;
+  background: #fff;
+  font: inherit;
+  font-weight: 400;
+}
+
+.practica-search input::placeholder {
+  color: #687b76;
+}
+
+.practica-search input:focus-visible {
+  border-color: #087f6b;
+  outline: 3px solid rgb(0 184 148 / 25%);
+  outline-offset: 1px;
+}
+
+.practica-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: start;
+  gap: 22px;
+}
+
+.practica-panel {
+  min-width: 0;
+  padding: 24px;
+  border: 1px solid #e1eae6;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgb(32 60 54 / 7%);
+}
+
+.practica-panel h2 {
+  margin: 0 0 18px;
+  color: #174f45;
+  font-size: 1.4rem;
+}
+
+.producto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 14px;
+}
+
+.producto-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 18px;
+  border: 1px solid #e1eae6;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 5px 14px rgb(35 68 58 / 6%);
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.producto-card:hover {
+  box-shadow: 0 9px 20px rgb(35 68 58 / 11%);
+  transform: translateY(-2px);
+}
+
+.producto-card h3 {
+  margin: 0 0 12px;
+  color: #24443d;
+  font-size: 1.03rem;
+  line-height: 1.4;
+}
+
+.producto-precio {
+  margin: 0 0 14px;
+  color: #075b50;
+  font-size: 1.05rem;
+  font-weight: 750;
+}
+
+.producto-stock {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  margin-bottom: 16px;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 0.82rem;
+  font-weight: 750;
+}
+
+.producto-stock-disponible {
+  color: #075b50;
+  background: #d9f7ed;
+}
+
+.producto-stock-agotado {
+  color: #8f2830;
+  background: #ffe3e3;
+}
+
+.practica-button {
+  min-height: 40px;
+  border: 0;
+  border-radius: 8px;
+  padding: 9px 14px;
+  color: #fff;
+  background: #087f6b;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 160ms ease;
+}
+
+.producto-card .practica-button {
+  width: 100%;
+  margin-top: auto;
+}
+
+.practica-button:hover:not(:disabled) {
+  background: #066454;
+}
+
+.practica-button:focus-visible {
+  outline: 3px solid rgb(0 184 148 / 35%);
+  outline-offset: 2px;
+}
+
+.practica-button:disabled {
+  color: #fff;
+  background: #778681;
+  cursor: not-allowed;
+}
+
+.practica-empty {
+  margin: 0;
+  border-radius: 8px;
+  padding: 18px;
+  color: #435a53;
+  background: #f1f7f5;
+}
+
+.carrito-lista {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.carrito-linea {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid #e5eceb;
+  padding-bottom: 12px;
+}
+
+.carrito-linea h3 {
+  margin: 0 0 5px;
+  color: #24443d;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.carrito-linea p {
+  margin: 0;
+  color: #435a53;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.carrito-quitar {
+  min-height: 34px;
+  flex: 0 0 auto;
+  border: 1px solid #a33e43;
+  border-radius: 7px;
+  padding: 6px 10px;
+  color: #8f2830;
+  background: #fff;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.carrito-quitar:hover {
+  color: #fff;
+  background: #a33e43;
+}
+
+.carrito-resumen {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+  border-top: 2px solid #dce9e4;
+  padding-top: 16px;
+}
+
+.carrito-resumen p {
+  margin: 0;
+  color: #315b50;
+}
+
+.carrito-total {
+  color: #075b50 !important;
+  font-size: 1.1rem;
+}
+
+.carrito-vaciar {
+  width: 100%;
+  border: 1px solid #a33e43;
+  color: #8f2830;
+  background: #fff;
+}
+
+.carrito-vaciar:hover:not(:disabled) {
+  color: #fff;
+  background: #a33e43;
+}
+
+.carrito-vaciar:disabled {
+  border-color: #778681;
+  color: #fff;
+  background: #778681;
+}
+
+.practica-aviso {
+  position: sticky;
+  z-index: 2;
+  top: 12px;
+  margin-bottom: 18px;
+  border: 1px solid #84c9a8;
+  border-left: 5px solid #087f6b;
+  border-radius: 8px;
+  padding: 13px 16px;
+  color: #124c39;
+  background: #e5f7ed;
+  box-shadow: 0 6px 18px rgb(32 60 54 / 12%);
+  font-weight: 750;
+}
+
+@media (max-width: 760px) {
+  .practica-dashboard {
+    width: min(100% - 24px, 560px);
+    padding: 24px 0;
+  }
+
+  .practica-header {
+    padding: 24px 20px;
+  }
+
+  .practica-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .practica-panel {
+    padding: 20px 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  .producto-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .carrito-linea {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
