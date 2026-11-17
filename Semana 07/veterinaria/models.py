@@ -4,7 +4,7 @@ from django.utils import timezone  # Importante para manejar la fecha actual en 
 
 
 # ==========================================
-# QUERYSET PERSONALIZADO (EJERCICIO 7)
+# QUERYSET PERSONALIZADO 
 # ==========================================
 class CitaMedicaQuerySet(models.QuerySet):
 
