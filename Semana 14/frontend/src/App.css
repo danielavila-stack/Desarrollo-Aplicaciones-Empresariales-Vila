@@ -194,6 +194,80 @@ h2 {
   text-align: center;
 }
 
+.app-nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 16px 0;
+}
+
+.app-nav button {
+  min-height: 40px;
+  border: 1px solid #cbd9d4;
+  border-radius: 8px;
+  padding: 8px 14px;
+  color: #174f45;
+  background: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.app-nav button[aria-pressed="true"] {
+  border-color: #087f6b;
+  color: #fff;
+  background: #087f6b;
+}
+
+.productos-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.producto-card {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid #e4eeea;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.producto-card h3 {
+  margin: 0;
+  color: #174f45;
+}
+
+.producto-categoria {
+  margin-bottom: 7px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.producto-precio {
+  margin: 0;
+  color: #087f6b;
+  font-size: 1.15rem;
+  font-weight: 750;
+}
+
+.producto-stock,
+.producto-agotado {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.producto-stock {
+  color: #315b50;
+}
+
+.producto-agotado {
+  color: #a33e43;
+}
+
 @media (max-width: 600px) {
   .dashboard {
     width: calc(100% - 24px);
